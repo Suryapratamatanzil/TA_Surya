@@ -163,6 +163,9 @@
         <a href="{{ route('perenang.create') }}" class="btn btn-add">Tambahkan</a>
     </div>
 
+    <p class="text-muted fst-italic mb-2">
+        *Untuk melihat riwayat seorang perenang, klik nama perenang yang ingin dilihat
+    </p>
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
