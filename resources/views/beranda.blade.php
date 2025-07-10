@@ -133,7 +133,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img src="{{ asset('images/logo.png') }}" alt="SwimLytics Logo">
+            <img src="{{ asset('images/Logo.png') }}" alt="SwimLytics Logo">
             SWIMLYTICS
         </a>
         <div class="ms-auto">
