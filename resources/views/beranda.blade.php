@@ -9,6 +9,7 @@
     <style>
         body {
             background-color: #f8f9fa;
+            padding-top: 56px;
         }
         .navbar {
             background-image: url('/images/Background.png');
@@ -130,7 +131,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="{{ asset('images/Logo.png') }}" alt="SwimLytics Logo">
