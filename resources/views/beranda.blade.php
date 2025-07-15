@@ -42,18 +42,12 @@
             font-weight: bold;
             font-size: 1.1rem;
         }
-        .dropdown-menu 
-        {
+        .dropdown-menu {
             background-color: #FF0000;
-            border-radius: 0;
-            padding-right: 0;
-            margin-top: 0 !important; /* ⬅ perbaikan inti */
-            position: absolute;
-            right: 0;
-            left: auto;
-            z-index: 1050;
+            border-radius: 0px;
+            padding-right: 0px;
+            margin-top: 50px;
         }
-
         .content-section {
             padding: 30px;
             margin-top: 20px;
@@ -143,7 +137,15 @@
             <img src="{{ asset('images/Logo.png') }}" alt="SwimLytics Logo">
             SWIMLYTICS
         </a>
-        <div class="ms-auto">
+
+        <!-- Tombol hamburger -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSwimlytics"
+                aria-controls="navbarSwimlytics" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Bagian collapse -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSwimlytics">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -163,6 +165,7 @@
         </div>
     </div>
 </nav>
+
 
 <div class="container content-section">
     <div class="section-header">
