@@ -45,12 +45,15 @@
         .dropdown-menu 
         {
             background-color: #FF0000;
-            border-radius: 0px;
-            padding-right: 0px;
+            border-radius: 0;
+            padding-right: 0;
+            margin-top: 0 !important; /* ⬅ perbaikan inti */
             position: absolute;
+            right: 0;
+            left: auto;
             z-index: 1050;
-            inset: auto auto auto 0; /* untuk bootstrap positioning */
         }
+
         .content-section {
             padding: 30px;
             margin-top: 20px;
