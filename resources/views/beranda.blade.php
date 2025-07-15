@@ -42,11 +42,14 @@
             font-weight: bold;
             font-size: 1.1rem;
         }
-        .dropdown-menu {
+        .dropdown-menu 
+        {
             background-color: #FF0000;
             border-radius: 0px;
             padding-right: 0px;
-            margin-top: 50px;
+            position: absolute;
+            z-index: 1050;
+            inset: auto auto auto 0; /* untuk bootstrap positioning */
         }
         .content-section {
             padding: 30px;
