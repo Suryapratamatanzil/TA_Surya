@@ -366,9 +366,7 @@
       content: '💡';
       font-size: 1.2rem;
       position: absolute;
-      top: -8px;
       left: 12px;
-      background: white;
       padding: 0 4px;
     }
 
@@ -376,7 +374,7 @@
       font-weight: bold;
       color: #856404;
       margin-bottom: 6px;
-      margin-left: 20px;
+      margin-left: 40px;
     }
 
     .highlight-box .highlight-text {
@@ -399,17 +397,15 @@
       content: '⚠️';
       font-size: 1.2rem;
       position: absolute;
-      top: -8px;
       left: 12px;
-      background: white;
       padding: 0 4px;
-    }
+      }
 
     .warning-box .warning-title {
       font-weight: bold;
       color: #721c24;
       margin-bottom: 6px;
-      margin-left: 20px;
+      margin-left: 40px;
     }
 
     .warning-box .warning-text {
@@ -760,9 +756,7 @@
           <div class="warning-title">Langkah Penting - Lakukan Prediksi!</div>
           <div class="warning-text">
             Untuk melakukan prediksi bakat renang, klik tombol <strong>prediksi</strong> 
-            <span style="background: #343a40; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem;">
-              <i class="fas fa-chart-line"></i>
-            </span> 
+            <img src="{{ asset('images/icon_prediksi.png') }}" alt="Prediksi">
             pada kolom "Prediksi" di baris perenang yang ingin diprediksi.
           </div>
         </div>
