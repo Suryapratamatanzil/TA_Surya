@@ -54,21 +54,21 @@
             font-weight: bold;
             color: #495057;
         }
-        .prediction-header-container { /* Kontainer untuk judul dan tanggal prediksi */
+        .prediction-header-container { 
             display: flex;
             justify-content: center;
             align: center;
             text-align: center;
-            align-items: baseline; /* Menyelaraskan teks dasar */
-            margin-bottom: 20px; /* Jarak bawah */
+            align-items: baseline; 
+            margin-bottom: 20px; 
         }
         .prediction-header-container h4 {
             font-weight: bold;
             color: #343a40;
-            margin-bottom: 0; /* Hapus margin bawah default h4 */
+            margin-bottom: 0; 
         }
         .prediction-date {
-            color: #6c757d; /* Warna teks abu-abu */
+            color: #6c757d; 
             align : center;
             margin-left: 5px;
         }
@@ -122,7 +122,6 @@
         .btn-predict-ulang i {
             margin-right: 10px;
         }
-        /* Styling untuk pesan sukses/error */
         .alert-success {
             background-color: #d4edda;
             color: #155724;
@@ -175,25 +174,22 @@
             color: #666;
         }
         .prediction-box .performance-label {
-            font-size: 2.5rem; /* Ukuran font lebih besar seperti di gambar */
+            font-size: 2.5rem; 
             font-weight: bold;
         }
         .performance-options span {
             font-size: 0.9rem;
             color: #999;
             margin-left: 5px;
-            font-weight: normal; /* Pastikan tidak bold secara default */
+            font-weight: normal; 
         }
-        /* Style untuk opsi Very High, High, Medium, Low */
-        .performance-options .very-high { color: #004d00; font-weight: bold; } /* Hijau tua/Dark Green */
-        .performance-options .high { color: #28a745; font-weight: bold; } /* Hijau */
-        .performance-options .medium { color: #ffc107; font-weight: bold; } /* Kuning */
-        .performance-options .low { color: #dc3545; font-weight: bold; } /* Merah */
+        .performance-options .very-high { color: #004d00; font-weight: bold; } 
+        .performance-options .high { color: #28a745; font-weight: bold; } 
+        .performance-options .medium { color: #ffc107; font-weight: bold; } 
+        .performance-options .low { color: #dc3545; font-weight: bold; } 
 
-        /* Untuk styling background label high/medium/low */
+        
         .performance-options .active-label {
-            /* Anda bisa tambahkan background atau border jika diinginkan,
-                tapi gambar hanya menunjukkan perubahan warna teks dan bold */
             font-weight: bold;
         }
 
@@ -282,7 +278,6 @@
         </div>
     </div>
 
-    <!-- Prediksi Performa -->
     <div class="col-lg-5 col-md-6 mb-4">
         <div class="prediction-box">
             <h4><i class="fas fa-chart-line"></i> Prediksi Performa
@@ -293,7 +288,7 @@
                     <span class="{{ $perenang->last_prediction_performance === 'Low' ? 'low' : '' }}">Low</span>
                 </span>
             </h4>
-            <!-- Performance percentage sebagai nilai utama -->
+        
             <div class="value performance-label">
                 {{ $perenang->last_prediction_performance }} ({{ number_format($perenang->last_prediction_percentage ?? 0, 2) }}%)
             </div>
@@ -311,18 +306,6 @@
         </div>
     @endif
 
-    <!-- {{-- Form untuk Prediksi Ulang --}}
-    <form action="{{ route('prediksi.show', $perenang->id) }}" method="GET">
-        @csrf
-        <input type="hidden" name="atlet_id" value="{{ $perenang->id }}">
-        {{-- Menggunakan gaya dan jarak dari prediksi terakhir jika ada, atau nilai default --}}
-        <input type="hidden" name="gaya" value="{{ $perenang->last_prediction_gaya ?? 'gaya_bebas' }}">
-        <input type="hidden" name="jarak" value="{{ $perenang->last_prediction_jarak ?? '50m' }}">
-
-        <button type="submit" class="btn btn-predict-ulang">
-            <i class="bi bi-arrow-repeat"></i> Prediksi Ulang
-        </button>
-    </form> -->
    <form action="{{ route('perenang.prediksi', $perenang->id) }}">
     <button type="submit" class="btn btn-predict-ulang">
         <i class="bi bi-arrow-repeat"></i> Prediksi Ulang

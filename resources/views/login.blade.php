@@ -21,17 +21,13 @@
         .login-container {
             background-color:rgb(255, 255, 255);
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            /* Hapus display: flex dan width di sini, akan diatur oleh Bootstrap grid */
-            /* width: 750px; */ 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
             overflow: hidden;
-            /* Tambahkan max-width untuk desktop, agar tidak terlalu lebar */
             max-width: 750px; 
-            width: 90%; /* Ambil 90% lebar layar, responsif */
+            width: 90%; 
         }
-        /* Gunakan flexbox pada .row di dalam .login-container untuk mengontrol tata letak */
         .login-container .row {
-            min-height: 100%; /* Pastikan row mengisi tinggi container */
+            min-height: 100%; 
         }
 
         .login-left {
@@ -40,23 +36,19 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            /* Hapus width: 40%; akan diatur oleh col-md-5 */
-            /* width: 40%; */ 
+            align-items: center; 
             border-right: 1px solid #e0e0e0;
         }
-        /* Atur ulang border-right untuk mobile */
-        @media (max-width: 767.98px) { /* Untuk breakpoint di bawah md (mobile) */
+        @media (max-width: 767.98px) { 
             .login-left {
-                border-right: none; /* Hapus border kanan */
-                border-bottom: 1px solid #e0e0e0; /* Tambahkan border bawah */
+                border-right: none; 
+                border-bottom: 1px solid #e0e0e0; 
             }
         }
-
         .login-left img {
             max-width: 150px;
             margin-bottom: 20px;
-            height: auto; /* Pastikan gambar responsif */
+            height: auto; 
         }
         .login-left h2 {
             color: #007bff;
@@ -69,9 +61,7 @@
             text-align: center;
         }
         .login-right {
-            padding: 40px;
-            /* Hapus width: 60%; akan diatur oleh col-md-7 */
-            /* width: 60%; */ 
+            padding: 40px; 
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -96,32 +86,27 @@
             background-color: #e9ecef;
             border-right: none;
         }
-
-        /* Gaya default tombol saat disabled atau input kosong (warna abu-abu dengan border) */
         .btn-login {
-            background-color: #CECECE; /* Latar belakang abu-abu */
+            background-color: #CECECE; 
             padding: 12px;
             border-radius: 5px;
             font-size: 1.1em;
             font-weight: bold;
-            color: white; /* Tulisan putih */
+            color: white; 
             width: 100%;
             margin-top: 20px;
-            cursor: not-allowed; /* Kursor default saat disabled */
+            cursor: not-allowed; 
         }
-
-        /* Gaya untuk button saat aktif (email & password terisi - warna biru) */
         .btn-login.active {
-            background-color: #0088FF; /* Latar belakang biru */
-            border: 1px solid #0077EE; /* Border biru gelap */
-            color: white; /* Tulisan putih */
-            cursor: pointer; /* Kursor menjadi pointer saat aktif */
+            background-color: #0088FF; 
+            border: 1px solid #0077EE; 
+            color: white; 
+            cursor: pointer; 
         }
         .btn-login.active:hover {
-            background-color: #0066CC; /* Warna biru sedikit lebih gelap saat di-hover aktif */
-            border-color: #0055BB; /* Border juga berubah saat hover aktif */
+            background-color: #0066CC;
+            border-color: #0055BB; 
         }
-
         .form-check-label {
             font-size: 0.9em;
             color: #495057;
@@ -130,14 +115,13 @@
 </head>
 <body>
     <div class="login-container">
-        <!-- Menggunakan Bootstrap Grid System untuk Responsif -->
-        <div class="row g-0"> <!-- g-0 untuk menghilangkan gutter antar kolom -->
-            <div class="col-md-5 col-12 login-left"> <!-- col-md-5 untuk desktop, col-12 untuk mobile -->
+        <div class="row g-0"> 
+            <div class="col-md-5 col-12 login-left"> 
                 <img src="{{ asset('images/Logo.png') }}" alt="SwimLytics Logo">
                 <h2>LOGIN</h2>
                 <p>Masuk ke akun SwimLyticsmu</p>
             </div>
-            <div class="col-md-7 col-12 login-right"> <!-- col-md-7 untuk desktop, col-12 untuk mobile -->
+            <div class="col-md-7 col-12 login-right"> 
                 <h3>Platform Login SwimLytics</h3>
                 <form action="{{ route('login.post') }}" method="POST">
                     @csrf
@@ -183,10 +167,10 @@
 
             if (emailValue !== '' && passwordValue !== '') {
                 loginButton.disabled = false;
-                loginButton.classList.add('active'); // Tambahkan kelas 'active'
+                loginButton.classList.add('active'); 
             } else {
                 loginButton.disabled = true;
-                loginButton.classList.remove('active'); // Hapus kelas 'active'
+                loginButton.classList.remove('active'); 
             }
         }
 

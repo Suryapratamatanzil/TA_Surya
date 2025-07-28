@@ -8,15 +8,15 @@
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
   <style>
     body {
-      /* background-image: url('{{ asset('images/Background2.png') }}'); */
       background-color:#f8f9fa;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      min-height: 100vh; /* Pastikan background menutupi seluruh viewport */
+      min-height: 100vh;
     }
 
     .form-input {
@@ -25,17 +25,17 @@
       color: black;
       border-radius: 0.5rem;
       padding: 0.75rem 1rem;
-      width: 100%; /* Penting agar flexbox bisa membagi ruang */
+      width: 100%; 
       transition: all 0.3s;
-      font-size: 1rem; /* Konsisten */
-      height: 3.5rem; /* Tinggi tetap untuk keseragaman visual */
+      font-size: 1rem; 
+      height: 3.5rem; 
     }
 
     .form-input:focus {
       background-color: white;
       outline: none;
       border-color: rgba(59, 130, 246, 0.7);
-      z-index: 1; /* Agar border fokus terlihat di atas border sebelahnya */
+      z-index: 1; 
     }
 
     .form-input::placeholder {
@@ -43,12 +43,11 @@
     }
 
     .form-label {
-      /* color: white; */
       color: black;
       font-weight: 500;
       margin-bottom: 0.5rem;
       display: block;
-      font-size: 1rem; /* Konsisten */
+      font-size: 1rem; 
     }
 
     select.form-input {
@@ -56,17 +55,16 @@
       -moz-appearance: none;
       appearance: none;
       background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-      background-position: right 0.75rem center; /* Sesuaikan posisi ikon dropdown */
+      background-position: right 0.75rem center; 
       background-repeat: no-repeat;
       background-size: 1.5em 1.5em;
       padding-right: 2.5rem;
     }
 
-    /* Penyesuaian khusus untuk input yang menyatu (tanggal lahir dan usia) */
     .flex .form-input.rounded-r-none {
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
-        border-right: none; /* Hilangkan border kanan */
+        border-right: none;
     }
 
     .flex .form-input.rounded-l-none {
@@ -74,48 +72,42 @@
         border-bottom-left-radius: 0;
     }
 
-    /* Penyesuaian border saat fokus pada input yang menyatu */
     .flex .form-input.rounded-r-none:focus {
-        border-right-color: transparent; /* Hilangkan border kanan saat fokus */
+        border-right-color: transparent; 
     }
 
     .flex .form-input.rounded-r-none:focus + .form-input.rounded-l-none {
-        border-left-color: rgba(59, 130, 246, 0.7); /* Pastikan border kiri input selanjutnya berwarna fokus */
+        border-left-color: rgba(59, 130, 246, 0.7); 
     }
 
-    /* Untuk input Flatpickr yang diubah */
     .flatpickr-input {
-      height: 3.5rem !important; /* Penting untuk memastikan tinggi Flatpickr sesuai */
-      padding-right: 2.5rem; /* Pastikan ada ruang untuk ikon kalender Flatpickr */
+      height: 3.5rem !important; 
+      padding-right: 2.5rem; 
     }
 
-    /* Posisi ikon kalender Flatpickr (jika Flatpickr menempatkannya secara terpisah) */
     .flatpickr-wrapper {
-        position: relative; /* Penting untuk posisi absolut ikon */
-        flex-grow: 1; /* Biarkan Flatpickr mengambil ruang yang tersisa di flex container */
+        position: relative; 
+        flex-grow: 1; 
     }
     .flatpickr-wrapper .flatpickr-input {
-        width: 100%; /* Pastikan input mengisi wrapper */
+        width: 100%; 
     }
-    /* Jika Flatpickr menggunakan elemen `span` atau `a` untuk ikon */
     .flatpickr-wrapper .flatpickr-input ~ span.flatpickr-calendar-icon,
     .flatpickr-wrapper .flatpickr-input ~ a.flatpickr-calendar-icon {
         position: absolute;
-        right: 1rem; /* Sesuaikan posisi ikon */
+        right: 1rem; 
         top: 50%;
         transform: translateY(-50%);
         cursor: pointer;
         color: #999;
         font-size: 1.25rem;
-        pointer-events: none; /* Agar klik pada ikon tetap membuka kalender */
+        pointer-events: none; 
     }
 
-    /* Keep your original .w-full padding. This was the one I accidentally removed/changed. */
     .w-full {
-      padding: 30px; /* Ini padding yang diterapkan pada wrapper konten utama Anda */
+      padding: 30px; 
     }
 
-    /* Styling untuk ikon info usia (yang akan disembunyikan/ditampilkan) */
     .info-icon-wrapper {
         opacity: 0;
         visibility: hidden;
@@ -125,24 +117,50 @@
         opacity: 1;
         visibility: visible;
     }
+
+    /* Style untuk tooltip yang lebih baik */
+    .tooltip {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: 8px;
+        padding: 8px 12px;
+        background-color: #1f2937;
+        color: white;
+        font-size: 12px;
+        border-radius: 6px;
+        white-space: nowrap;
+        z-index: 1000;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    }
+
+    .tooltip::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 4px solid transparent;
+        border-top-color: #1f2937;
+    }
+
+    .info-icon-wrapper:hover .tooltip {
+        opacity: 1;
+        visibility: visible;
+    }
   </style>
 </head>
 <body class="text-white flex items-center justify-center min-h-screen">
-
-  <!-- <div class="w-full">
-    <div class="flex items-center mb-8 px-6 pt-6">
-      <a href="{{ route('beranda') }}" class="text-xl hover:text-blue-400 transition-colors">
-        <i class="fas fa-arrow-left mr-4"></i>Tambah perenang
-      </a>
-    </div> -->
-
     <div class="w-full">
   <div class="flex items-center mb-8 px-6 pt-6">
     <a href="{{ route('beranda') }}" class="text-xl text-black">
       <i class="fas fa-arrow-left mr-4 text-black"></i>Tambah perenang
     </a>
   </div>
-
 
     <form action="{{ route('perenang.store') }}" method="POST" class="w-full px-6 pb-10">
       @csrf
@@ -176,8 +194,7 @@
                 Tanggal Lahir
                 <span id="ageInfoIconWrapper" class="relative text-red-500 cursor-pointer info-icon-wrapper">
                   <i class="fas fa-info-circle"></i>
-                  <div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-64 bg-gray-900 text-white text-xs p-2 rounded-lg 
-                              opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50 shadow-lg text-left">
+                  <div class="tooltip">
                     Untuk hasil prediksi yang akurat, pastikan usia perenang berada dalam rentang 6 hingga 14 tahun.
                   </div>
                 </span>
@@ -203,7 +220,6 @@
             </div>
           </div>
 
-
           <div class="mb-4">
             <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
             <select id="jenis_kelamin" name="jenis_kelamin" class="form-input">
@@ -213,17 +229,62 @@
             </select>
           </div>
 
-          <div class="mb-4">
-            <label for="panjang_kaki" class="form-label">Panjang Kaki (cm)</label>
+          <div class="mb-4 relative">
+            <label for="panjang_kaki" class="form-label flex items-center gap-2">
+              Panjang Kaki (cm)
+              <span id="iconPanjangKaki" class="text-red-500 cursor-pointer info-icon-wrapper">
+                <i class="fas fa-info-circle"></i>
+                <div class="tooltip">
+                  Panjang kaki tidak proporsional (disarankan 45-50% dari tinggi badan)
+                </div>
+              </span>
+            </label>
             <input type="number" id="panjang_kaki" name="panjang_kaki" class="form-input" placeholder="Panjang Kaki" value="{{ old('panjang_kaki') }}" maxlength="5" step="0.1">
           </div>
 
           <div>
-            <label class="form-label">Armspan (cm)</label>
-            <div class="grid grid-cols-3 gap-4">
-              <input type="number" id="panjang_lengan_kiri" name="panjang_lengan_kiri" class="form-input" placeholder="Kiri" value="{{ old('panjang_lengan_kiri') }}" maxlength="5" step="0.1">
-              <input type="number" id="panjang_lengan_kanan" name="panjang_lengan_kanan" class="form-input" placeholder="Kanan" value="{{ old('panjang_lengan_kanan') }}" maxlength="5" step="0.1">
-              <input type="number" id="panjang_armspan" name="panjang_armspan" class="form-input" placeholder="Total" value="{{ old('panjang_armspan') }}" maxlength="5" step="0.1">
+            <!-- Armspan Section -->
+            <label class="form-label block mb-2 font-semibold text-gray-700">Armspan (cm)</label>
+            <div class="grid grid-cols-3 gap-4 items-start">
+
+              <!-- Lengan Kiri -->
+              <div class="relative">
+                <input type="number" id="panjang_lengan_kiri" name="panjang_lengan_kiri"
+                  class="form-input w-full rounded border border-gray-300 px-3 py-2"
+                  placeholder="Kiri" value="{{ old('panjang_lengan_kiri') }}" step="0.1">
+                <span id="iconLenganKiri" class="absolute -top-6 right-0 text-red-500 cursor-pointer info-icon-wrapper">
+                  <i class="fas fa-info-circle"></i>
+                  <div class="tooltip">
+                    Panjang armspan kiri tidak proporsional (disarankan 30-35% dari tinggi badan)
+                  </div>
+                </span>
+              </div>
+
+              <!-- Lengan Kanan -->
+              <div class="relative">
+                <input type="number" id="panjang_lengan_kanan" name="panjang_lengan_kanan"
+                  class="form-input w-full rounded border border-gray-300 px-3 py-2"
+                  placeholder="Kanan" value="{{ old('panjang_lengan_kanan') }}" step="0.1">
+                <span id="iconLenganKanan" class="absolute -top-6 right-0 text-red-500 cursor-pointer info-icon-wrapper">
+                  <i class="fas fa-info-circle"></i>
+                  <div class="tooltip">
+                    Panjang armspan kanan tidak proporsional (disarankan 30-35% dari tinggi badan)
+                  </div>
+                </span>
+              </div>
+
+              <!-- Armspan Total -->
+              <div class="relative">
+                <input type="number" id="panjang_armspan" name="panjang_armspan"
+                  class="form-input w-full rounded border border-gray-300 px-3 py-2"
+                  placeholder="Total" value="{{ old('panjang_armspan') }}" step="0.1">
+                <span id="iconArmspanTotal" class="absolute -top-6 right-0 text-red-500 cursor-pointer info-icon-wrapper">
+                  <i class="fas fa-info-circle"></i>
+                  <div class="tooltip">
+                    Armspan total tidak proporsional (disarankan 95-110% dari tinggi badan, ideal ~100%)
+                  </div>
+                </span>
+              </div>
             </div>
           </div>
 
@@ -243,7 +304,6 @@
   </div>
 
   <script>
-    // Inisialisasi Flatpickr
     flatpickr("#tanggal_lahir", {
       dateFormat: "Y-m-d",
       altInput: true,
@@ -257,7 +317,6 @@
       }
     });
 
-    // Fungsi untuk menghitung usia
     function calculateAge(birthDate) {
       const usiaInput = document.getElementById('usia');
       if (!birthDate) {
@@ -288,8 +347,67 @@
     ];
 
     const submitBtn = document.getElementById('submitBtn');
-    // Dapatkan elemen wrapper ikon info usia
     const ageInfoIconWrapper = document.getElementById('ageInfoIconWrapper'); 
+    
+    function validateProporsionalitas() {
+      const tinggi = parseFloat(document.getElementById('tinggi').value);
+      const kaki = parseFloat(document.getElementById('panjang_kaki').value);
+      const kiri = parseFloat(document.getElementById('panjang_lengan_kiri').value);
+      const kanan = parseFloat(document.getElementById('panjang_lengan_kanan').value);
+      const total = parseFloat(document.getElementById('panjang_armspan').value);
+
+      const iconKaki = document.getElementById('iconPanjangKaki');
+      const iconKiri = document.getElementById('iconLenganKiri');
+      const iconKanan = document.getElementById('iconLenganKanan');
+      const iconTotal = document.getElementById('iconArmspanTotal');
+
+      // Sembunyikan semua icon dulu
+      [iconKaki, iconKiri, iconKanan, iconTotal].forEach(el => el.classList.remove('show-icon'));
+
+      let isValid = true;
+
+      // Validasi hanya jika tinggi badan sudah diisi (sebagai referensi)
+      if (!isNaN(tinggi) && tinggi > 0) {
+        
+        // Validasi panjang kaki berdasarkan persentase tinggi badan
+        // Normal: 45-50% dari tinggi badan (sesuai literatur RSLL & SHR, antropometri modern)
+        if (!isNaN(kaki) && kaki > 0) {
+          const persentaseKaki = (kaki / tinggi) * 100;
+          if (persentaseKaki < 52 || persentaseKaki > 64) {
+            iconKaki.classList.add('show-icon');
+          }
+        }
+
+        // Validasi armspan kiri berdasarkan persentase tinggi badan
+        // Normal: 30-35% dari tinggi badan (setiap lengan ~30-35% dari total ~60-65%)
+        if (!isNaN(kiri) && kiri > 0) {
+          const persentaseKiri = (kiri / tinggi) * 100;
+          if (persentaseKiri < 44 || persentaseKiri > 55) {
+            iconKiri.classList.add('show-icon');
+          }
+        }
+
+        // Validasi armspan kanan berdasarkan persentase tinggi badan
+        // Normal: 30-35% dari tinggi badan (setiap lengan ~30-35% dari total ~60-65%)
+        if (!isNaN(kanan) && kanan > 0) {
+          const persentaseKanan = (kanan / tinggi) * 100;
+          if (persentaseKanan < 44 || persentaseKanan > 55) {
+            iconKanan.classList.add('show-icon');
+          }
+        }
+
+        // Validasi armspan total (fingertip to fingertip) berdasarkan persentase tinggi badan
+        // Normal: 95-110% dari tinggi badan, ideal sekitar 100% (arm-span ≈ tinggi badan)
+        if (!isNaN(total) && total > 0) {
+          const persentaseTotal = (total / tinggi) * 100;
+          if (persentaseTotal < 95 || persentaseTotal > 110) {
+            iconTotal.classList.add('show-icon');
+          }
+        }
+      }
+
+      return isValid;
+    }
 
     function validateForm() {
       let allFieldsValid = requiredFields.every(id => {
@@ -302,7 +420,7 @@
         }
 
         if (el.tagName === 'SELECT') {
-          return el.value !== '' && el.value !== null && el.value !== el.querySelector('option[disabled]').value;
+          return el.value !== '' && el.value !== null && el.value !== el.querySelector('option[disabled]')?.value;
         }
         
         return el.value.trim() !== '';
@@ -316,18 +434,19 @@
 
       let isAgeWithinRange = true;
 
-      // Sembunyikan ikon info usia secara default
+      // Reset age icon
       ageInfoIconWrapper.classList.remove('show-icon');
 
       if (isNaN(usiaValue) || usiaValue < 0) { 
           isAgeWithinRange = false; 
       } else if (usiaValue < minAge || usiaValue > maxAge) {
           isAgeWithinRange = false;
-          // Tampilkan ikon info usia jika usia di luar rentang
           ageInfoIconWrapper.classList.add('show-icon');
       }
 
-      // Tombol submit hanya aktif jika semua field valid DAN usia dalam rentang yang diizinkan
+      // Validasi proporsionalitas hanya untuk menampilkan alert, tidak mempengaruhi submit
+      validateProporsionalitas();
+
       if (allFieldsValid && isAgeWithinRange) {
         submitBtn.disabled = false;
         submitBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
@@ -339,17 +458,40 @@
       }
     }
 
+    // Event listeners untuk semua field
     requiredFields.forEach(id => {
       const el = document.getElementById(id);
       if (el) {
         if (el.tagName === 'SELECT') {
           el.addEventListener('change', validateForm);
-        } else if (id === 'tanggal_lahir') {
-            // Flatpickr's onChange event sudah menangani ini
-        }
-        else {
+        } else {
           el.addEventListener('input', validateForm);
+          // Tambahan: validasi saat field kehilangan fokus untuk memastikan alert muncul
+          el.addEventListener('blur', validateForm);
         }
+      }
+    });
+
+    // Event listener khusus untuk field proportional yang perlu validasi real-time
+    // Termasuk tinggi badan karena menjadi referensi perhitungan persentase
+    const proportionalFields = ['tinggi', 'panjang_kaki', 'panjang_lengan_kiri', 'panjang_lengan_kanan', 'panjang_armspan'];
+    proportionalFields.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        // Validasi saat mengetik
+        el.addEventListener('input', function() {
+          // Delay sedikit untuk memberikan waktu user mengetik
+          setTimeout(() => {
+            validateProporsionalitas();
+            validateForm();
+          }, 500);
+        });
+        
+        // Validasi saat field kehilangan fokus
+        el.addEventListener('blur', function() {
+          validateProporsionalitas();
+          validateForm();
+        });
       }
     });
 
@@ -368,8 +510,9 @@
               calculateAge(dateObj);
           }
       }
-      validateForm(); // Panggil validasi awal saat DOM siap
+      validateForm(); 
     });
+
   </script>
 
 </body>

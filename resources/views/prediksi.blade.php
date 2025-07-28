@@ -18,36 +18,35 @@
             color: white;
             padding: 10px 24px;
             font-size: 1.1rem;
-            display: inline-flex; /* Agar ikon dan teks sejajar */
-            align-items: center; /* Untuk mensejajarkan vertikal */
-            justify-content: center; /* Untuk menengahkan konten */
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
         }
         .btn-prediksi:hover {
             background-color: #343a40;
             color: white;
         }
         .btn-prediksi img {
-            height: 1.2em; /* Sesuaikan ukuran ikon agar cocok dengan teks */
-            margin-left: 0.5em; /* Jarak antara teks dan ikon (karena ikon di kanan teks) */
+            height: 1.2em; 
+            margin-left: 0.5em; 
         }
 
-        /* CSS untuk Animasi Lingkaran */
         .loading-circle-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 250px; /* Sesuaikan tinggi agar konten terlihat di tengah */
+            min-height: 250px; 
             text-align: center;
             flex-direction: column;
-            color: #333; /* Warna teks default */
+            color: #333; 
         }
         .loading-circle {
             width: 150px;
             height: 150px;
             border: 5px solid #e0e0e0;
-            border-top: 5px solid #007bff; /* Warna biru untuk progres */
+            border-top: 5px solid #007bff; 
             border-radius: 50%;
-            animation: spin 1s linear infinite; /* Animasi berputar */
+            animation: spin 1s linear infinite; 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -55,7 +54,7 @@
             position: relative;
         }
         .loading-text {
-            font-size: 2rem; /* Ukuran font lebih besar */
+            font-size: 2rem; 
             font-weight: bold;
             color: #333;
             position: absolute;
@@ -101,39 +100,31 @@
             color: #666;
         }
         .prediction-box .performance-label {
-            font-size: 2.5rem; /* Ukuran font lebih besar seperti di gambar */
+            font-size: 2.5rem; 
             font-weight: bold;
         }
         .performance-options span {
             font-size: 0.9rem;
             color: #999;
             margin-left: 5px;
-            font-weight: normal; /* Pastikan tidak bold secara default */
+            font-weight: normal; 
         }
-        /* Style untuk opsi Very High, High, Medium, Low */
-        .performance-options .very-high { color: #004d00; font-weight: bold; } /* Hijau tua/Dark Green */
-        .performance-options .high { color: #28a745; font-weight: bold; } /* Hijau */
-        .performance-options .medium { color: #ffc107; font-weight: bold; } /* Kuning */
-        .performance-options .low { color: #dc3545; font-weight: bold; } /* Merah */
-
-        /* Untuk styling background label high/medium/low */
+        .performance-options .very-high { color: #004d00; font-weight: bold; } 
+        .performance-options .high { color: #28a745; font-weight: bold; } 
+        .performance-options .medium { color: #ffc107; font-weight: bold; } 
+        .performance-options .low { color: #dc3545; font-weight: bold; } 
         .performance-options .active-label {
-            /* Anda bisa tambahkan background atau border jika diinginkan,
-                tapi gambar hanya menunjukkan perubahan warna teks dan bold */
             font-weight: bold;
         }
-
-        /* Untuk teks "predicting..." dan "finish" */
         #loadingStatusText {
             font-size: 1.2rem;
             color: #555;
             margin-top: 10px;
         }
-        /* Menambahkan style untuk tombol prediksi yang disabled */
         .btn-prediksi:disabled {
-            background-color: #6c757d; /* Warna abu-abu Bootstrap default untuk disabled */
+            background-color: #6c757d; 
             cursor: not-allowed;
-            opacity: 0.65; /* Sedikit transparan untuk visual disabled */
+            opacity: 0.65; 
         }
 
     </style>
@@ -299,7 +290,6 @@ $(document).ready(function() {
     const jarakSelect = $('#jarak');
     const submitPredictionBtn = $('#submitPredictionBtn');
 
-    // Peta batasan gaya dan jarak
     const distanceOptions = {
         'gaya_bebas': [
             { value: '50m', text: '50 meter' },
@@ -319,122 +309,108 @@ $(document).ready(function() {
         ]
     };
 
-    // Fungsi untuk mereset tampilan ke form awal
     function resetForm() {
         predictionResult.hide();
         loadingAnimation.hide();
         formSection.show();
-        // Reset juga semua warna performance options
+        
         $('#performanceVeryHigh, #performanceHigh, #performanceMedium, #performanceLow').removeClass('very-high high medium low').css('color', '#999');
         
-        // Reset dropdown gaya dan jarak
-        gayaSelect.val(''); // Mengosongkan pilihan gaya
-        jarakSelect.val(''); // Mengosongkan pilihan jarak
-        jarakSelect.prop('disabled', true); // Nonaktifkan jarak
-        jarakSelect.find('option:not(:first)').remove(); // Hapus opsi jarak yang dinamis
-        updateSubmitButtonStatus(); // Perbarui status tombol submit
+        
+        gayaSelect.val(''); 
+        jarakSelect.val('');
+        jarakSelect.prop('disabled', true); 
+        jarakSelect.find('option:not(:first)').remove(); 
+        updateSubmitButtonStatus(); 
     }
 
-    // Fungsi untuk memperbarui dropdown jarak berdasarkan gaya yang dipilih
+    
     function updateJarakOptions() {
         const selectedGaya = gayaSelect.val();
-        jarakSelect.empty(); // Kosongkan opsi jarak yang ada
-        jarakSelect.append('<option selected disabled value="">Pilih Jarak...</option>'); // Tambahkan opsi default
+        jarakSelect.empty(); 
+        jarakSelect.append('<option selected disabled value="">Pilih Jarak...</option>'); 
 
         if (selectedGaya && distanceOptions[selectedGaya]) {
             distanceOptions[selectedGaya].forEach(option => {
                 jarakSelect.append(`<option value="${option.value}">${option.text}</option>`);
             });
-            jarakSelect.prop('disabled', false); // Aktifkan dropdown jarak
+            jarakSelect.prop('disabled', false);
         } else {
-            jarakSelect.prop('disabled', true); // Nonaktifkan jika tidak ada gaya dipilih atau gaya tidak valid
+            jarakSelect.prop('disabled', true); 
         }
-        jarakSelect.val(''); // Reset pilihan jarak setelah opsi diperbarui
-        updateSubmitButtonStatus(); // Perbarui status tombol submit
+        jarakSelect.val(''); 
+        updateSubmitButtonStatus(); 
     }
 
-    // Fungsi untuk memperbarui status tombol submit
     function updateSubmitButtonStatus() {
         const selectedGaya = gayaSelect.val();
         const selectedJarak = jarakSelect.val();
 
-        // Tombol aktif jika gaya dan jarak sudah dipilih (tidak disabled dan tidak value kosong)
         if (selectedGaya && selectedGaya !== "" && selectedJarak && selectedJarak !== "") {
             submitPredictionBtn.prop('disabled', false);
-            submitPredictionBtn.removeClass('btn-secondary').addClass('btn-prediksi'); // Pastikan menggunakan kelas aktif
+            submitPredictionBtn.removeClass('btn-secondary').addClass('btn-prediksi'); 
         } else {
             submitPredictionBtn.prop('disabled', true);
-            submitPredictionBtn.removeClass('btn-prediksi').addClass('btn-secondary'); // Menggunakan kelas Bootstrap default untuk disabled
+            submitPredictionBtn.removeClass('btn-prediksi').addClass('btn-secondary'); 
         }
     }
 
-
-    // Event listener untuk perubahan pada dropdown gaya
     gayaSelect.on('change', function() {
         updateJarakOptions();
     });
 
-    // Event listener untuk perubahan pada dropdown jarak (setelah diisi dinamis)
     jarakSelect.on('change', function() {
         updateSubmitButtonStatus();
     });
 
 
-    // Awalnya, sembunyikan hasil prediksi dan loading
     resetForm();
-    updateSubmitButtonStatus(); // Panggil saat halaman dimuat untuk set status awal tombol
+    updateSubmitButtonStatus(); 
 
-    // Event listener untuk submit form prediksi
+
     $('#predictionForm').on('submit', function(e) {
-        e.preventDefault(); // Mencegah reload halaman
+        e.preventDefault(); 
 
-        // Validasi lagi sebelum submit (untuk jaga-jaga)
         if (submitPredictionBtn.prop('disabled')) {
             alert('Mohon pilih Gaya dan Jarak yang valid.');
             return;
         }
 
-        formSection.hide(); // Sembunyikan form
-        loadingAnimation.show(); // Tampilkan animasi loading
+        formSection.hide(); 
+        loadingAnimation.show(); 
         loadingPercentage.text('0%');
         loadingStatusText.text('predicting...');
 
-        // Animasi persentase (simulasi)
         let percentage = 0;
         const interval = setInterval(() => {
             percentage += 10;
-            if (percentage <= 90) { // Berhenti di 90% sampai respons diterima
+            if (percentage <= 90) { 
                 loadingPercentage.text(percentage + '%');
             } else {
-                clearInterval(interval); // Hentikan interval jika sudah mencapai 90% atau lebih
+                clearInterval(interval);
             }
-        }, 300); // Setiap 300ms, persentase naik 10%
+        }, 300); 
 
         $.ajax({
-            url: $(this).attr('action'), // Ambil URL dari atribut action form
-            method: $(this).attr('method'), // Ambil method dari atribut method form
-            data: $(this).serialize(), // Serialize data form
+            url: $(this).attr('action'), 
+            method: $(this).attr('method'), 
+            data: $(this).serialize(), 
             success: function(response) {
-                // Hentikan simulasi persentase
                 clearInterval(interval);
 
-                // Pastikan persentase menunjukkan 100% dan status finish
                 loadingPercentage.text('100%');
                 loadingStatusText.text('finish');
 
-                // Tunggu sebentar sebelum menampilkan hasil akhir
                 setTimeout(() => {
-                    loadingAnimation.hide(); // Sembunyikan animasi loading
+                    loadingAnimation.hide(); 
 
-                    // Tampilkan hasil prediksi
                     $('#resultTitle').text(`Hasil Prediksi ${response.gaya_label} ${response.jarak_label}`);
                     $('#predictedTime').text(response.predicted_time);
                     $('#performanceOutput').text(`${response.predicted_performance} (${response.performance_percentage}%)`);
 
-                    // Reset warna untuk performa options
                     $('#performanceVeryHigh, #performanceHigh, #performanceMedium, #performanceLow').removeClass('very-high high medium low').css('color', '#999');
 
-                    // Beri warna bold pada performa yang sesuai
+                    
                     if (response.predicted_performance === 'Very High') {
                         $('#performanceVeryHigh').addClass('very-high').css('color', '#004d00'); // Warna untuk Very High
                     } else if (response.predicted_performance === 'High') {
@@ -444,24 +420,22 @@ $(document).ready(function() {
                     } else if (response.predicted_performance === 'Low') {
                         $('#performanceLow').addClass('low').css('color', '#dc3545');
                     }
-
-                    predictionResult.show(); // Tampilkan area hasil
-                }, 800); // Delay singkat agar user melihat "100% finish"
+                    predictionResult.show(); 
+                }, 800); 
 
             },
             error: function(xhr, status, error) {
-                clearInterval(interval); // Pastikan interval dihentikan jika ada error
+                clearInterval(interval); 
                 loadingAnimation.hide();
-                formSection.show(); // Tampilkan kembali form jika ada error
+                formSection.show(); 
                 alert('Terjadi kesalahan saat memproses prediksi: ' + xhr.responseText);
                 console.error('AJAX error:', status, error, xhr.responseText);
             }
         });
     });
 
-    // Event listener untuk tombol "Prediksi Ulang"
     predictAgainButton.on('click', function() {
-        resetForm(); // Panggil fungsi reset untuk kembali ke form
+        resetForm(); 
     });
 });
 </script>
